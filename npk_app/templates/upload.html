@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+{% block content %}
+
+{% if form.errors %}
+    
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error }}</strong>
+        </div>
+    {% endfor %}
+    
+{% endif %}
+
+<form method="post" enctype="multipart/form-data" capture>
+  {% csrf_token %}
+   {{ form.image }}
+  <button type="submit">Upload</button>
+
+</form>
+
+{% endblock %}
+<!---{% if img_obj %}
+  <h3>Succesfully uploaded : {{img_obj.title}}</h3>
+  <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
+{% endif %}-->
